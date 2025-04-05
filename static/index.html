@@ -1,121 +1,181 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <title>Telegram bot</title>
-    <meta name="description" content="Бот для поиска олимпиад!">
-    <link id="favicon" rel="icon" href="https://cdn.glitch.global/baa867b4-d6a0-494e-84b2-13f8f077fe3f/logo.ico?v=1742811400082" type="image/x-icon">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информационная страница</title>
     <style>
-        /* styles */
-        /* called by your view template */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
 
-        /* You might want to try something fancier: */
-        /* less: http://lesscss.org/ */
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a29bfe;
+            --dark-color: #2d3436;
+            --light-color: #f5f6fa;
+            --accent-color: #fd79a8;
+        }
 
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: helvetica, arial, sans-serif;
-            margin: 25px;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--light-color), var(--secondary-color));
+            color: var(--dark-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
+            margin: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
         }
 
         h1 {
-            font-weight: bold;
-            color: pink;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            font-size: 2.5rem;
         }
 
-        .bold {
-            font-weight: bold;
+        .description {
+            margin-bottom: 2.5rem;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--dark-color);
         }
 
-        p {
-            max-width: 600px;
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        form {
-            margin-bottom: 25px;
-            padding: 15px;
-            background-color: cyan;
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .btn {
             display: inline-block;
-            width: 100%;
-            max-width: 340px;
-            border-radius: 3px;
-        }
-
-        input {
-            display: block;
-            margin-bottom: 10px;
-            padding: 5px;
-            width: 100%;
-            border: 1px solid lightgrey;
-            border-radius: 3px;
-            font-size: 16px;
-        }
-
-        button {
-            font-size: 16px;
-            border-radius: 3px;
-            background-color: lightgrey;
-            border: 1px solid grey;
-            box-shadow: 2px 2px teal;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+            border: none;
             cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
         }
 
-        button:hover {
-            background-color: yellow;
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
         }
 
-        button:active {
-            box-shadow: none;
+        .btn-telegram {
+            background: linear-gradient(45deg, #0088cc, #00aced);
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.3);
         }
 
-        li {
-            margin-bottom: 5px;
+        .btn-telegram:hover {
+            box-shadow: 0 8px 20px rgba(0, 136, 204, 0.4);
+            background: linear-gradient(45deg, #00aced, #0088cc);
         }
 
-        footer {
-            margin-top: 50px;
-            padding-top: 25px;
-            border-top: 1px solid lightgrey;
+        .author {
+            margin-top: 2rem;
+            text-align: center;
+            font-style: italic;
+            color: var(--dark-color);
+            opacity: 0.8;
         }
 
-        footer>a {
-            color: #BBBBBB;
+        .links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
         }
 
-        .nicejob {
-            text-decoration: line-through;
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
-
 <body>
-    <header>
-        <h1>
-            Привет!
-            Это бот для для напоминаний об занятиях по КиберШколе
-        </h1>
-    </header>
+    <div class="container">
+        <h1>Добро пожаловать!</h1>
+        <p class="description">Это информационная страница проекта с полезными ссылками и контактной информацией.</p>
 
-    <main>
-        <h1>
-            <a href="https://t.me/remind_lesson_bot">Чтоб запустить бот нажми на меня!<br /></a>
-        </h1>
-        <h2>
-            <a href="https://glitch.com/~">Проект</a>
-            <br>
-            <a href="https://glitch.com/edit/#!/">Код</a>
-        </h2>
-        <br>
-        <a href="https://t.me/mmmike07">@mmmike07<br /></a>
-        <a href="https://github.com/Mikekcpp/"><br /></a>
+        <div class="card">
+            <h2>О проекте</h2>
+            <p>Этот проект создан для напоминания про занятия в КиберШколе. Здесь вы найдете ссылки на исходный код проекта и сможете перейти к взаимодействию с Telegram-ботом.</p>
+        </div>
 
+        <div class="card">
+            <h2>Исходный код</h2>
+            <p>Весь исходный код проекта доступен в открытом репозитории на GitHub. Вы можете изучить его, предложить улучшения или использовать в своих проектах.</p>
+            <a href="https://github.com/Mikekcpp/Remind-Telegram-bot-" class="btn" target="_blank">Перейти в репозиторий</a>
+        </div>
 
-    </main>
+        <div class="card">
+            <h2>Telegram бот</h2>
+            <p>Наш Telegram-бот готов помочь вам! Перейдите по кнопке ниже, чтобы начать взаимодействие с ботом прямо сейчас.</p>
+            <a href="https://t.me/remind_lesson_bot" class="btn btn-telegram" target="_blank">Перейти к боту</a>
+        </div>
+
+        <div class="links">
+            <!-- Дополнительные ссылки можно добавить здесь -->
+        </div>
+
+        <p class="author">Автор проекта: Михаил Коростелев</p>
+    </div>
 </body>
-
 </html>
