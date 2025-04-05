@@ -10,13 +10,10 @@ index = open("static/index.html").read()
 
 # Функция для запуска бота
 def run_bot():
-    # loop = asyncio.new_event_loop()  # Создаем новый цикл событий
-    # asyncio.set_event_loop(loop)  # Устанавливаем его как текущий для потока
-    # executor.start_polling(dp, skip_updates=True)  # Запускаем бота
+    loop = asyncio.new_event_loop()  # Создаем новый цикл событий
+    asyncio.set_event_loop(loop)  # Устанавливаем его как текущий для потока
+    executor.start_polling(dp, skip_updates=True)  # Запускаем бота
 
-    loop = asyncio.get_event_loop()
-    loop.create_task(scheduler())
-    executor.start_polling(dp)
 
 
 # Запуск бота в отдельном потоке
