@@ -3,7 +3,6 @@ from flask import Flask
 import threading
 import asyncio
 
-
 app = Flask(__name__)
 index = open("static/index.html", encoding="utf-8").read()
 
@@ -13,7 +12,6 @@ def run_bot():
     loop = asyncio.new_event_loop()  # Создаем новый цикл событий
     asyncio.set_event_loop(loop)  # Устанавливаем его как текущий для потока
     executor.start_polling(dp, skip_updates=True)  # Запускаем бота
-
 
 
 # Запуск бота в отдельном потоке

@@ -3,7 +3,6 @@ from aiogram import Bot, Dispatcher, types, executor
 from datetime import datetime
 import logging, asyncio
 
-
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
 logging.basicConfig(
@@ -167,9 +166,9 @@ async def scheduler():
         now = datetime.now()
         # если сегодня вторник (1) и не выходной # Проверяем время - 7:00 или 12:00
         if (
-            (now.weekday() == 1)
-            and (now.date() not in halidays)
-            and (now.hour == 7 or now.hour == 12)
+                (now.weekday() == 1)
+                and (now.date() not in halidays)
+                and (now.hour == 7 or now.hour == 12)
         ):
             await send_remind_message()
 
