@@ -13,10 +13,10 @@ logging.basicConfig(
 )
 
 # Ваши токены
-TELEGRAM_TOKEN = "токен"
+TELEGRAM_TOKEN = "7963490228:AAEbeghrfvlfisatxz3AJ4wMr8Njp_tdy74"
 bot = Bot(token=TELEGRAM_TOKEN)
 dp = Dispatcher(bot)
-chat_id = "id чата"
+chat_id = "1294375064"
 # Список праздников
 halidays = [
     ### зимние какникулы
@@ -179,10 +179,3 @@ async def scheduler():
 
         # Ждем 60 секунд перед следующей проверкой
         await asyncio.sleep(60)
-
-
-# Запуск бота и планировщика задач
-if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.create_task(scheduler())
-    executor.start_polling(dp)
