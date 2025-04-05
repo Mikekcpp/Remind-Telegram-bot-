@@ -5,7 +5,7 @@ import asyncio
 
 
 app = Flask(__name__)
-index = open("static/index.html").read()
+index = open("static/index.html", encoding="utf-8").read()
 
 
 # Функция для запуска бота
