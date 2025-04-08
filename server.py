@@ -1,4 +1,5 @@
-from bot import dp, executor  # Импортируем необходимые компоненты из bot.py
+from bot import dp, on_startup
+from aiogram import executor
 from flask import Flask
 import threading
 import asyncio
@@ -7,18 +8,18 @@ app = Flask(__name__)
 index = open("static/index.html", encoding="utf-8").read()
 
 
-# Функция для запуска бота
 def run_bot():
-    executor.start_polling(dp, on_startup=on_startup, skip_updates=True)
-    
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+    executor.start_polling(dp, skip_updates=True, on_startup=on_startup, loop=loop)
+
 
 # Запуск бота в отдельном потоке
 bot_thread = threading.Thread(target=run_bot)
-bot_thread.daemon = True  # Поток завершится, если основной поток завершится
+bot_thread.daemon = True
 bot_thread.start()
 
 
-# Process index page
 @app.route("/")
 def root():
     print("index!")
@@ -26,4 +27,4 @@ def root():
 
 
 if __name__ == "__main__":
-    app.run(debug=False)  # Отключаем debug, чтобы избежать перезапуска
+    app.run(debug=False, use_reloader=False)  # Отключаем reloader
